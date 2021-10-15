@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>Soda-Pop MQTT Test</title>
+    <style>
+        p {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Soda-Pop MQTT Test</h1>
+    <h3>This page is meant to display a data from the soda machine through a test MQTT server</h3>
+    <div id="BrokerOutput"style="margin:0"></div>
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
+        type="text/javascript">
+    </script>
+    <script src="script.js" type="text/javascript"></script>
+    <script>
+        MQTTconnect()
+    </script>
+
+</body>
