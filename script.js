@@ -2,8 +2,8 @@
 
 var mqtt;
 var reconnectTimeout = 2000;
-var host="broker.mqttdashboard.com";
-var port=8000;
+var host="test.mosquitto.org";
+var port=8081;
 var subscription="calvin-soda-pop"
 
 function writeOutput(output) {
@@ -32,6 +32,7 @@ function MQTTconnect() {
     writeOutput("~ connecting to " + host + ":" + port)
     mqtt = new Paho.MQTT.Client(host, port, "clientjs") 
     var options = {
+        useSSL: true,
         timeout: 3,
         onSuccess: onConnect,
     };
