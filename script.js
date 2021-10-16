@@ -4,7 +4,7 @@ var mqtt;
 var reconnectTimeout = 2000;
 var host="test.mosquitto.org";
 var port=8081;
-var subscription="calvin-soda-pop"
+var topic="calvin-soda-pop"
 
 function writeOutput(output) {
     const out_area=document.getElementById("BrokerOutput")
@@ -12,23 +12,18 @@ function writeOutput(output) {
     const content = document.createTextNode(output)
     newElement.appendChild(content)
     out_area.appendChild(newElement)
+    console.log(output)
 }
-
 
 function onConnect(){
-    console.log("connected");
     writeOutput("~ connected to " + host + ":" + port);
-    mqtt.subscribe(subscription);
-    writeOutput("~ subscribed to topic " + subscription);
+    mqtt.subscribe(topic);
+    writeOutput("~ subscribed to topic " + topic);
     writeOutput("~ output will appear below");
-}
-
-function onMessageArrived(msg){
-    out_area.appendChild(document.createTextNode("Message received " + msg.payloadString));
+    writeOutput("-----------------------------");
 }
 
 function MQTTconnect() {
-    console.log("connecting to " + host);
     writeOutput("~ connecting to " + host + ":" + port)
     mqtt = new Paho.MQTT.Client(host, port, "clientjs") 
     var options = {
@@ -36,6 +31,6 @@ function MQTTconnect() {
         timeout: 3,
         onSuccess: onConnect,
     };
-    mqtt.onMessageArrived = onMessageArrived;
+    mqtt.onMessageArrived = message => writeOutput(message.payloadString);
     mqtt.connect(options);
 }
