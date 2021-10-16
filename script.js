@@ -1,4 +1,4 @@
-// script from http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
+// script based on examples from http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
 
 var mqtt;
 var reconnectTimeout = 2000;
