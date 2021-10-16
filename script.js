@@ -2,9 +2,9 @@
 
 var mqtt;
 var reconnectTimeout = 2000;
-var host="test.mosquitto.org";
+var host="mqtt.eclipseprojects.io/mqtt";
 var port=8081;
-var topic="calvin-soda-pop"
+var topic="net/calvin/2021/soda-pop/machine"
 
 function writeOutput(output) {
     const out_area=document.getElementById("BrokerOutput")
