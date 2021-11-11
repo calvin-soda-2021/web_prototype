@@ -1,13 +1,12 @@
 // script based on examples from http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
-
 var mqtt;
 var reconnectTimeout = 2000;
 var host="mqtt.eclipseprojects.io/mqtt";
 var port=8081;
 var topic="net/calvin/2021/soda-pop/machine"
 
-function writeOutput(output) {
-    const out_area=document.getElementById("BrokerOutput")
+export function writeOutput(output, element="BrokerOutput") {
+    const out_area=document.getElementById(element)
     const newElement = document.createElement("p");
     const content = document.createTextNode(output)
     newElement.appendChild(content)
@@ -23,7 +22,7 @@ function onConnect(){
     writeOutput("-----------------------------");
 }
 
-function MQTTconnect() {
+async function MQTTconnect() {
     writeOutput("~ connecting to " + host + ":" + port)
     mqtt = new Paho.MQTT.Client(host, port, "clientjs") 
     var options = {
@@ -32,5 +31,7 @@ function MQTTconnect() {
         onSuccess: onConnect,
     };
     mqtt.onMessageArrived = message => writeOutput(message.payloadString);
-    mqtt.connect(options);
+    await mqtt.connect(options);
 }
+
+MQTTconnect();
